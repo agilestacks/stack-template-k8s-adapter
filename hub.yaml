@@ -1,0 +1,63 @@
+---
+version: 1
+kind: stack
+meta:
+  name: k8s-aws-adapter:1
+  brief: stack-k8s-aws import adapter stack
+
+components:
+- name: k8s-aws
+  source:
+    dir: components/k8s-aws
+- name: tiller
+  source:
+    dir: components/tiller
+- name: acm
+  source:
+    dir: components/acm
+- name: traefik
+  source:
+    dir: components/traefik
+- name: dex
+  source:
+    dir: components/dex
+- name: kube-dashboard
+  source:
+    dir: components/kube-dashboard
+
+requires:
+- aws
+
+lifecycle:
+  verbs: [deploy, undeploy]
+  order:
+  - k8s-aws
+  - tiller
+  - acm
+  - traefik
+  - dex
+  - kube-dashboard
+  requires:
+    optional:
+    - component.ingress.ssl.enabled:acm
+
+outputs:
+- name: k8s-aws:dns.domain
+- name: k8s-aws:kubernetes.api.endpoint
+# kubernetes.api.* keys will be appended by lifecycle.js
+- name: k8s-aws:cloud.region
+- name: k8s-aws:cloud.availabilityZone
+- name: k8s-aws:cloud.bucket
+- name: k8s-aws:cloud.role.master
+- name: k8s-aws:cloud.role.worker
+- name: k8s-aws:cloud.vpc.id
+- name: k8s-aws:cloud.vpc.cidr
+- name: k8s-aws:cloud.vpc.worker.subnet.id
+- name: k8s-aws:cloud.vpc.worker.sg.id
+- name: k8s-aws:cloud.iam.worker.instanceProfile
+- name: traefik:component.ingress.protocol
+- name: traefik:component.ingress.fqdn
+- name: traefik:component.ingress.ssoFqdn
+- name: traefik:component.ingress.urlPrefix
+- name: traefik:component.ingress.ssoUrlPrefix
+- name: kube-dashboard:component.kubernetes-dashboard.url
