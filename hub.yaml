@@ -47,7 +47,6 @@ outputs:
 # kubernetes.api.* keys will be appended by lifecycle.js
 - name: k8s-aws:cloud.region
 - name: k8s-aws:cloud.availabilityZone
-- name: k8s-aws:cloud.bucket
 - name: k8s-aws:cloud.role.master
 - name: k8s-aws:cloud.role.worker
 - name: k8s-aws:cloud.vpc.id
