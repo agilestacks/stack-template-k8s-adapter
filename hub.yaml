@@ -54,7 +54,9 @@ lifecycle:
 outputs:
 - name: k8s-aws:dns.domain
 - name: k8s-aws:kubernetes.api.endpoint
-# kubernetes.api.* keys will be appended by lifecycle.js
+- name: k8s-aws:kubernetes.api.caCert
+- name: k8s-aws:kubernetes.api.clientCert
+- name: k8s-aws:kubernetes.api.clientKey
 - name: k8s-aws:cloud.region
 - name: k8s-aws:cloud.availabilityZone
 - name: k8s-aws:cloud.role.master
