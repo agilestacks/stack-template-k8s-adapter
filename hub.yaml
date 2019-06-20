@@ -52,6 +52,7 @@ lifecycle:
     - component.kubernetes-dashboard.enabled:kube-dashboard
 
 outputs:
+- name: cloud.kind
 - name: k8s-aws:dns.domain
 - name: k8s-aws:kubernetes.api.endpoint
 - name: k8s-aws:kubernetes.api.caCert
